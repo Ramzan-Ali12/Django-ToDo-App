@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="center">
+    <form method="POST"  action="{% url 'profile' %}" enctype="multipart/form-data" class="card">
+        {% csrf_token %}
+        
+        <!-- Render Profile Avatar -->
+        {% if user.profile.avatar %}
+            <img src="{{ user.profile.avatar.url }}" alt="{{ user.username }}" class="avatar"/>
+        {% endif %}
+        
+        <h2 class="text-center">{{ user.username | title }}</h2>
+        <p class="text-center"><a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
+        <hr>
+        
+        <!-- Render the UserUpdateForm -->
+        <div class="form-group">
+            {{ user_form.email.label_tag }}
+            {{ user_form.email }}
+        </div>
+        <!-- Render the Username-->
+        <div class="form-group">
+            {{user_form.username.label_tag}}
+            {{user_form.username}}
+        </div>
+
+        <!-- Render the ProfileUpdateForm -->
+        <div class="form-group">
+            {{ profile_form.avatar.label_tag }}
+            {{ profile_form.avatar }}
+        </div>
+
+        <button type="submit" class="btn btn-primary full-width">Update Profile</button>
+    </form>
+</div>
+
+{% endblock content %}
