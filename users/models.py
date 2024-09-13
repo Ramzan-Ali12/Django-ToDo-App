@@ -17,9 +17,6 @@ class Profile(models.Model):
 
         # resize the image
         img = Image.open(self.avatar.path)
-        print("Image",img)
-        print("Image Height",img.height)
-        print("Image Width",img.width)
         if img.height > 300 or img.width > 300:
             output_size = (300, 300)
             # create a thumbnail

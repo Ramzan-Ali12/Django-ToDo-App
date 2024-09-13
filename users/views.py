@@ -45,11 +45,6 @@ class ProfileView(LoginRequiredMixin, View):
                    }
         return render(request, 'users/profile.html', context)
     
-    # post method for the Profile view
-    from django.views import View
-
-# ...
-
 class MyProfileView(LoginRequiredMixin, View):
     def get(self, request):
         user_form = UserUpdateForm(instance=request.user)
@@ -67,13 +62,11 @@ class MyProfileView(LoginRequiredMixin, View):
             request.POST, 
             instance=request.user
         )
-        print("user_form",user_form)
         profile_form = ProfileUpdateForm(
             request.POST,
             request.FILES,
             instance=request.user.profile
         )
-        print("profile_form",profile_form)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
